@@ -13,4 +13,5 @@ public interface AssetsDAO {
 	public void deleteAsset(int theId);
 
 	public Assets getAsset(int theId);
+
 }

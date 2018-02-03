@@ -2,7 +2,6 @@ package com.rafal.assetsevaluator.DAO;
 
 import java.util.List;
 
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -30,10 +29,8 @@ public class AssetsDAOImpl implements AssetsDAO {
 				currentSession.createQuery("from Assets", Assets.class);
 		
 		// execute query and get result list
-		System.out.println("APPLOG: theQuery.getResultList()");
 		List<Assets> assets = theQuery.getResultList();
 		
-		System.out.println("APPLOG: Returning assets in getAssets");
 		return assets;
 	}
 

@@ -19,7 +19,7 @@
 
 					<tr>
 						<td><label>Date:</label></td>
-						<td><form:input path="date" /></td>
+						<td><form:input path="date" type="date" /></td>
 					</tr>
 					<tr>
 						<td><label>Asset Name:</label></td>
