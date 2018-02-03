@@ -2,6 +2,7 @@ package com.rafal.assetsevaluator.DAO;
 
 import java.util.List;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -34,6 +35,40 @@ public class AssetsDAOImpl implements AssetsDAO {
 		
 		System.out.println("APPLOG: Returning assets in getAssets");
 		return assets;
+	}
+
+	@Override
+	@Transactional
+	public void saveAsset(Assets theAsset) {
+
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		currentSession.saveOrUpdate(theAsset);
+		
+	}
+	
+
+	@Override
+	@Transactional
+	public void deleteAsset(int theId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Query theQuery = 
+				currentSession.createQuery("delete from Assets where id=:assetId");
+		theQuery.setParameter("assetId", theId);
+		
+		theQuery.executeUpdate();
+		
+	}
+
+	@Override
+	@Transactional	
+	public Assets getAsset(int theId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Assets theAsset = currentSession.get(Assets.class, theId);
+		
+		return theAsset;
 	}
 
 }
