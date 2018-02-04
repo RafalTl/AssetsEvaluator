@@ -3,11 +3,9 @@ package com.rafal.assetsevaluator.mvc;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,24 +23,18 @@ public class AssetsController {
 
 	@Autowired
 	private AssetsService assetsService;
-
+	
 	@RequestMapping("/")
-	public String showHomePage(Model theModel) {
+	public String showHomePage(@RequestParam(required=false, name="chosenDate") String month, Model theModel) {
 
 		// get assets from the DAO
 		List<Assets> theAssets = assetsService.getAssets();
-
-		theModel.addAttribute("assets", theAssets);
-
-		/*
-		 * wyswietlic
-		 */
+		
 		// For displaying list of months with added assets
-
 		Set<String> dates = new HashSet<>();
 
 		for (Assets tempAsset : theAssets) {
-			// Add date to dates and cut last 3 characters 2010-02-02 to 2010-02
+			// Add date to dates and cut last 3 characters eg. 2010-03-02 to 2010-03
 			dates.add(tempAsset.getDate().substring(0, tempAsset.getDate().length() - 3));
 		}
 
@@ -56,12 +48,15 @@ public class AssetsController {
 
 		// Reverse the order - looks better
 		Collections.reverse(sortedDates);
-
-		System.out.println("--------------"); // just for debug
-		for (String temp : sortedDates) {
-			System.out.println(temp);
+		
+		if(month == null) {
+			// If RequestParam month is null then set month to the latest (default) available value
+			month = sortedDates.get(0);
 		}
+		
+		List<Assets> theAssetsSortedByMonth = assetsService.getAssetsByMonth(month); 
 
+		theModel.addAttribute("assets", theAssetsSortedByMonth);
 		theModel.addAttribute("sortedDates", sortedDates);
 
 		return "main-menu";

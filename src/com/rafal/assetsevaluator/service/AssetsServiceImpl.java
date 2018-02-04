@@ -45,4 +45,9 @@ public class AssetsServiceImpl implements AssetsService {
 		return assetsDAO.getAsset(theId);
 	}
 
+	@Override
+	public List<Assets> getAssetsByMonth(String month) {
+		return assetsDAO.getAssetsByMonth(month);
+	}
+
 }

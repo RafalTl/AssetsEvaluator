@@ -14,4 +14,6 @@ public interface AssetsDAO {
 
 	public Assets getAsset(int theId);
 
+	public List<Assets> getAssetsByMonth(String month);
+
 }

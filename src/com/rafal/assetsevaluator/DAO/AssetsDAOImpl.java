@@ -26,7 +26,7 @@ public class AssetsDAOImpl implements AssetsDAO {
 		
 		// create a query
 		Query<Assets> theQuery = 
-				currentSession.createQuery("from Assets", Assets.class);
+				currentSession.createQuery("FROM Assets", Assets.class);
 		
 		// execute query and get result list
 		List<Assets> assets = theQuery.getResultList();
@@ -51,7 +51,7 @@ public class AssetsDAOImpl implements AssetsDAO {
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		Query theQuery = 
-				currentSession.createQuery("delete from Assets where id=:assetId");
+				currentSession.createQuery("DELETE FROM Assets WHERE id=:assetId");
 		theQuery.setParameter("assetId", theId);
 		
 		theQuery.executeUpdate();
@@ -66,6 +66,25 @@ public class AssetsDAOImpl implements AssetsDAO {
 		Assets theAsset = currentSession.get(Assets.class, theId);
 		
 		return theAsset;
+	}
+
+	@Override
+	@Transactional
+	public List<Assets> getAssetsByMonth(String month) {
+		
+		// get the current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		// create a query
+		Query<Assets> theQuery = 
+				currentSession.createQuery("FROM Assets WHERE date LIKE '%" + month + "%'", Assets.class);
+		
+		//SELECT * FROM blog_posts WHERE keywords LIKE '%design%' ORDER BY timestamp
+		
+		// execute query and get result list
+		List<Assets> assetsSortedByMonth = theQuery.getResultList();
+		
+		return assetsSortedByMonth;
 	}
 
 }

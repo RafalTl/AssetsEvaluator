@@ -19,6 +19,17 @@
 	<input type="button" value="Add asset"
 		onclick="window.location.href='showAddAssetForm'; return false;"
 		class="add-button" />
+		
+	<hr>
+
+	<c:forEach var="tempSortedDate" items="${sortedDates}">
+		<c:url var="sortLink" value="/">
+			<c:param name="chosenDate" value="${tempSortedDate}" />
+		</c:url>
+		<li><a href="${sortLink}">Sort by: ${tempSortedDate}</a></li>
+	</c:forEach>
+
+	<hr>
 
 	<table>
 		<tr>
@@ -59,11 +70,7 @@
 		</c:forEach>
 	</table>
 
-	<hr>
 
-	<c:forEach var="tempSortedDate" items="${sortedDates}">
-		<ul><c:out value="${tempSortedDate}" /></ul>
-	</c:forEach>
 
 </body>
 </html>

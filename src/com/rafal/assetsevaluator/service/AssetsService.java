@@ -13,5 +13,7 @@ public interface AssetsService {
 	public void deleteAsset(int theId);
 
 	public Assets getAsset(int theId);
+
+	public List<Assets> getAssetsByMonth(String month);
 	
 }
