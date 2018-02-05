@@ -33,6 +33,10 @@
 
 	<hr>
 
+	<h3>Total Value: ${totalValueForMonth}</h3>
+
+	<hr>
+
 	<table>
 		<tr>
 			<th>ID</th>

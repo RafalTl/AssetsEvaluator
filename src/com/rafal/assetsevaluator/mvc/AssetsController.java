@@ -55,7 +55,13 @@ public class AssetsController {
 		}
 		
 		List<Assets> theAssetsSortedByMonth = assetsService.getAssetsByMonth(month); 
+		
+		double totalValueForMonth = 0;
+		for(Assets tempAsset: theAssetsSortedByMonth) {
+			totalValueForMonth += tempAsset.getAmount();
+		}
 
+		theModel.addAttribute("totalValueForMonth", totalValueForMonth);
 		theModel.addAttribute("assets", theAssetsSortedByMonth);
 		theModel.addAttribute("sortedDates", sortedDates);
 
