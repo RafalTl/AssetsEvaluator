@@ -79,8 +79,6 @@ public class AssetsDAOImpl implements AssetsDAO {
 		Query<Assets> theQuery = 
 				currentSession.createQuery("FROM Assets WHERE date LIKE '%" + month + "%'", Assets.class);
 		
-		//SELECT * FROM blog_posts WHERE keywords LIKE '%design%' ORDER BY timestamp
-		
 		// execute query and get result list
 		List<Assets> assetsSortedByMonth = theQuery.getResultList();
 		
